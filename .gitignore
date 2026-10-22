@@ -1,0 +1,89 @@
+# ==========================================
+# 1. Environment & Sensitive Credentials
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ==========================================
+# 2. Android & Gradle
+# ==========================================
+# Build outputs
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Gradle caches & build dirs
+.gradle/
+**/build/
+**/android/app/build/
+**/android/build/
+**/android/.gradle/
+
+# Keystore & Signing (JANGAN DI-COMMIT)
+*.keystore
+*.jks
+release.keystore
+debug.keystore
+
+# Android Studio & SDK specifics
+local.properties
+.cxx/
+captures/
+.externalNativeBuild/
+
+# ==========================================
+# 3. AI Service (Diabaikan Sepenuhnya)
+# ==========================================
+ai_service/
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+*.onnx
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+
+# ==========================================
+# 4. Backend (Laravel / PHP / Node)
+# ==========================================
+vendor/
+node_modules/
+public/storage
+public/build
+public/hot
+storage/*.key
+.phpunit.result.cache
+.phpunit.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================
+# 5. IDEs & Code Editors
+# ==========================================
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.navigation/
+
+# ==========================================
+# 6. Operating System & Temporary Files
+# ==========================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+*.log
+*.tmp
+tmp/

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ─────────────────────────────────────────────────────
+         Permissions
+         Requirement 1.5: Only access after obtaining Legitimate_Permission
+         Requirement 13.4: Request only necessary Android permissions
+    ───────────────────────────────────────────────────────── -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <!-- Notification Access diminta melalui Settings, bukan runtime permission -->
+    <!-- android.permission.BIND_NOTIFICATION_LISTENER_SERVICE dideklarasikan pada service -->
+
+    <application
+        android:name=".SekuritiwApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher_round"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Sekuritiw"
+        android:usesCleartextTraffic="false"
+        tools:targetApi="31">
+
+        <!-- Main Activity -->
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Sekuritiw">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Share to Scan Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            
+            <!-- Open APK Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/vnd.android.package-archive" />
+            </intent-filter>
+            
+            <!-- Share APK Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/vnd.android.package-archive" />
+            </intent-filter>
+        </activity>
+
+        <!-- ─────────────────────────────────────────────────────
+             Notification Listener Service (SEKURITIW Core)
+             Requirement 1.1: Capture notification content within 500ms
+             Requirement 1.3: Operate continuously as background service
+             Requirement 1.4: System will restart with START_STICKY within 30s
+             Requirement 1.5: Requires BIND_NOTIFICATION_LISTENER_SERVICE permission
+        ───────────────────────────────────────────────────────── -->
+        <service
+            android:name=".data.service.SekuritiwNotificationListener"
+            android:label="Sekuritiw - Pelindung Digital"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+            android:exported="true"
+            android:foregroundServiceType="specialUse">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+            <!-- Meta-data untuk menampilkan deskripsi saat user mengaktifkan di Pengaturan -->
+            <meta-data
+                android:name="android.app.notification_listener_description"
+                android:resource="@string/notification_listener_description" />
+        </service>
+
+    </application>
+</manifest>
+

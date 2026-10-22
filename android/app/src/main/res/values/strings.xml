@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sekuritiw</string>
+    <string name="notification_listener_description">Sekuritiw membutuhkan akses notifikasi untuk menganalisis pesan masuk dan melindungi Anda dari penipuan digital secara real-time. Kami tidak menyimpan isi pesan Anda.</string>
+</resources>
+
